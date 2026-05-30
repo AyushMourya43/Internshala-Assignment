@@ -1,7 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import InternshipCard from "./InternshipCard";
 import SkeletonCard from "./SkeletonCard";
+import Pagination from "./Pagination";
 import "./InternshipList.css";
+import "./Pagination.css";
+
+const ITEMS_PER_PAGE = 6;
 
 const SORT_OPTIONS = [
   { value: "latest",   label: "Latest" },
@@ -30,8 +34,22 @@ function extractMonths(str) {
 
 export default function InternshipList({ internships, loading, error }) {
   const [sortBy, setSortBy] = useState("latest");
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // Reset to page 1 when internships list changes (filters applied)
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [internships]);
 
   const sorted = sortInternships(internships, sortBy);
+  const totalPages = Math.ceil(sorted.length / ITEMS_PER_PAGE);
+  const start = (currentPage - 1) * ITEMS_PER_PAGE;
+  const paginated = sorted.slice(start, start + ITEMS_PER_PAGE);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   if (loading) {
     return (
@@ -65,7 +83,7 @@ export default function InternshipList({ internships, loading, error }) {
           <select
             className="sort-select"
             value={sortBy}
-            onChange={(e) => setSortBy(e.target.value)}
+            onChange={(e) => { setSortBy(e.target.value); setCurrentPage(1); }}
           >
             {SORT_OPTIONS.map((opt) => (
               <option key={opt.value} value={opt.value}>{opt.label}</option>
@@ -81,11 +99,18 @@ export default function InternshipList({ internships, loading, error }) {
           <p className="empty-sub">Try adjusting or clearing filters.</p>
         </div>
       ) : (
-        <div className="cards-container">
-          {sorted.map((intern) => (
-            <InternshipCard key={intern.id} internship={intern} />
-          ))}
-        </div>
+        <>
+          <div className="cards-container">
+            {paginated.map((intern) => (
+              <InternshipCard key={intern.id} internship={intern} />
+            ))}
+          </div>
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={handlePageChange}
+          />
+        </>
       )}
     </div>
   );
