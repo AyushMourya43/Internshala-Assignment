@@ -1,0 +1,49 @@
+.app { min-height: 100vh; background: #f5f7fa; }
+
+.main-layout {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 16px;
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.sidebar {
+  width: 260px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 64px;
+}
+
+.content {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  .main-layout {
+    padding: 16px 12px;
+    gap: 14px;
+  }
+
+  .sidebar {
+    width: 220px;
+    top: 58px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .main-layout {
+    flex-direction: column;
+    padding: 12px 10px;
+    gap: 12px;
+  }
+
+  .sidebar {
+    width: 100%;
+    position: static;
+  }
+}

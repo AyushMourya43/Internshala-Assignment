@@ -1,0 +1,128 @@
+.navbar {
+  background: #fff;
+  border-bottom: 1px solid #e0e0e0;
+  height: 56px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+.navbar-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.navbar-logo {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  flex-shrink: 0;
+}
+
+.logo-intern { color: #008BDC; }
+.logo-shala  { color: #21ba45; }
+
+.navbar-links {
+  display: flex;
+  gap: 0;
+  height: 100%;
+  align-items: stretch;
+}
+
+.navbar-links a {
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #444;
+  border-bottom: 3px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+  white-space: nowrap;
+}
+
+.navbar-links a:hover,
+.navbar-links a.active {
+  color: #008BDC;
+  border-bottom-color: #008BDC;
+}
+
+.courses-badge {
+  background: #ff6b35;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 1px 5px;
+  border-radius: 3px;
+  margin-left: 5px;
+  letter-spacing: 0.5px;
+}
+
+.navbar-actions {
+  margin-left: auto;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.btn-login {
+  padding: 6px 16px;
+  border: 1.5px solid #008BDC;
+  border-radius: 3px;
+  color: #008BDC;
+  font-size: 13px;
+  font-weight: 600;
+  background: #fff;
+  transition: background 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+
+.btn-login:hover { background: #f0f8ff; }
+
+.btn-register {
+  padding: 6px 16px;
+  border: 1.5px solid #008BDC;
+  border-radius: 3px;
+  background: #008BDC;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  transition: background 0.15s;
+  white-space: nowrap;
+}
+
+.btn-register:hover { background: #0079c4; }
+
+/* Tablet */
+@media (max-width: 900px) {
+  .navbar-inner { gap: 16px; padding: 0 12px; }
+  .navbar-links a { padding: 0 10px; font-size: 12px; }
+  .btn-login, .btn-register { padding: 5px 12px; font-size: 12px; }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .navbar { height: 52px; }
+
+  .navbar-inner {
+    padding: 0 12px;
+    gap: 10px;
+  }
+
+  .navbar-logo { font-size: 18px; }
+
+  .navbar-links { display: none; }
+
+  .btn-login { display: none; }
+
+  .btn-register {
+    padding: 5px 14px;
+    font-size: 12px;
+  }
+}
