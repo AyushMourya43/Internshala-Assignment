@@ -1,24 +1,39 @@
 # Internshala Clone – Internship Search Page
 
-A React replication of [Internshala's internship search page](https://internshala.com/internships/) built with **React + Vite**.
+A pixel-perfect React replication of [Internshala's internship search page](https://internshala.com/internships/) built with **React + Vite**.
 
-## Features
+## 🔗 Links
+- **Live Demo:** [internshala-assignment.vercel.app](https://internshala-assignment.vercel.app)
+- **GitHub:** [github.com/AyushMourya43/Internshala-Assignment](https://github.com/AyushMourya43/Internshala-Assignment)
 
-- 📋 Lists internships fetched from Internshala's API (falls back to mock data if CORS blocks the request)
-- 🔍 Client-side filtering by:
-  - **Profile** (e.g. Web Dev, Data Science)
-  - **Location** (city or Remote)
-  - **Duration** (1 / 2 / 3 / 6+ months)
-  - **Stipend** (minimum ₹ threshold)
-- 🎨 UI closely mirrors Internshala's design
-- 📱 Responsive layout
+## ✨ Features
 
-## Getting Started
+- 📋 **Live API Integration** — Fetches real internships from Internshala's API with graceful CORS fallback to mock data
+- 🔍 **Client-side Filtering** by:
+  - Profile (e.g. Web Dev, Data Science)
+  - Location (city or Remote)
+  - Work from home / Part-time toggles
+  - Duration (1 / 2 / 3 / 6+ months)
+  - Minimum Stipend (slider from ₹0 to ₹10K)
+- 🔀 **Sort** by Latest, Stipend (High to Low), Duration (Short to Long)
+- 📄 **Internship Detail Page** — Click any card to view full details via React Router
+- 💀 **Skeleton Loading** — Shimmer placeholder cards while data loads
+- 🎨 **Faithful UI** — Closely mirrors Internshala's design system (colors, typography, layout)
+- 📱 **Fully Responsive** — Works on mobile, tablet, and desktop
+
+## 🛠 Tech Stack
+
+- **React 18** + **Vite**
+- **React Router v6** — client-side routing
+- **Axios** — API requests
+- **CSS Modules** — component-scoped styling
+
+## 🚀 Getting Started
 
 ```bash
 # Clone the repo
-git clone https://github.com/YOUR_USERNAME/internshala-clone.git
-cd internshala-clone
+git clone https://github.com/AyushMourya43/Internshala-Assignment.git
+cd Internshala-Assignment
 
 # Install dependencies
 npm install
@@ -29,7 +44,7 @@ npm run dev
 
 Open [http://localhost:5173](http://localhost:5173) in your browser.
 
-## Build for Production
+## 📦 Build for Production
 
 ```bash
 npm run build
@@ -37,34 +52,4 @@ npm run build
 
 Output goes to `dist/`.
 
-## Deployment (Vercel)
-
-1. Push this repo to GitHub
-2. Go to [vercel.com](https://vercel.com) → New Project → Import your GitHub repo
-3. Vercel auto-detects Vite — click **Deploy**
-4. Done! Your app is live.
-
-## Project Structure
-
-```
-src/
-├── components/
-│   ├── Navbar.jsx          # Top navigation bar
-│   ├── FilterPanel.jsx     # Sidebar filter controls
-│   ├── InternshipCard.jsx  # Individual internship card
-│   └── InternshipList.jsx  # List + loading/empty states
-├── hooks/
-│   └── useInternships.js   # Data fetching + API parsing
-├── utils/
-│   └── filters.js          # Pure filter logic
-├── App.jsx                 # Root layout
-└── main.jsx                # Entry point
-```
-
-## Note on API & CORS
-
-The Internshala API (`https://internshala.com/hiring/search`) is fetched directly.
-In production browsers, CORS headers may block this request — the app gracefully
-falls back to realistic mock data in that case.
-
-To bypass CORS during local development, the Vite dev server proxies `/api` → `https://internshala.com`.
+## 📁 Project Structure
