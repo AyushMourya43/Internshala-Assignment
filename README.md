@@ -3,7 +3,7 @@
 A pixel-perfect React replication of [Internshala's internship search page](https://internshala.com/internships/) built with **React + Vite**.
 
 ## 🔗 Links
-- **Live Demo:** [internshala-assignment.vercel.app](https://internshala-assignment.vercel.app)
+- **Live Demo:** [internshala-assignment.vercel.app](https://internshala-assignment-rho.vercel.app/)
 - **GitHub:** [github.com/AyushMourya43/Internshala-Assignment](https://github.com/AyushMourya43/Internshala-Assignment)
 
 ## ✨ Features
@@ -51,26 +51,6 @@ npm run build
 ```
 
 Output goes to `dist/`.
-
-## 📁 Project Structure
-
-src/
-├── components/
-│   ├── Navbar.jsx           # Top navigation bar
-│   ├── FilterPanel.jsx      # Sidebar filters (profile, location, stipend, duration)
-│   ├── InternshipCard.jsx   # Individual internship card with Link to detail
-│   ├── InternshipList.jsx   # List + sort + loading/empty states
-│   ├── SkeletonCard.jsx     # Shimmer loading placeholder
-│   └── SkeletonCard.css
-├── pages/
-│   ├── InternshipDetail.jsx # Full detail page for each internship
-│   └── InternshipDetail.css
-├── hooks/
-│   └── useInternships.js    # API fetching, parsing, CORS fallback
-├── utils/
-│   └── filters.js           # Pure filter + sort functions
-├── App.jsx                  # Root layout + React Router routes
-└── main.jsx                 # Entry point with BrowserRouter
 
 ## ⚠️ Note on API & CORS
 
