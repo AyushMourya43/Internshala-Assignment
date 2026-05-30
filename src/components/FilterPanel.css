@@ -201,11 +201,15 @@
   margin-top: 2px;
 }
 
-/* View more filters */
-.view-more-section { padding: 10px 16px; }
+/* View more + Clear all on same row */
+.view-more-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+}
 
 .view-more-btn {
-  width: 100%;
   text-align: left;
   font-size: 13px;
   font-weight: 600;
@@ -222,28 +226,25 @@
   color: #0079c4 !important;
 }
 
+.clear-all-fixed {
+  font-size: 13px;
+  font-weight: 600;
+  color: #008BDC;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  padding: 0;
+}
+
+.clear-all-fixed:hover { text-decoration: underline; }
+
 /* Filter hint */
 .filter-hint {
   font-size: 14px;
   color: #999;
   margin-left: 2px;
 }
-
-/* Clear all bottom */
-.clear-all-bottom {
-  display: block;
-  margin-left: auto;
-  margin-top: 14px;
-  font-size: 13px;
-  color: #008BDC;
-  font-weight: 600;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-family: inherit;
-}
-
-.clear-all-bottom:hover { text-decoration: underline; }
 
 /* Keyword search */
 .keyword-section {

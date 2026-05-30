@@ -18,12 +18,21 @@ export default function FilterPanel({ internships, filters, onChange, onClear })
   const [isOpen, setIsOpen] = useState(false);
   const [showMoreFilters, setShowMoreFilters] = useState(false);
 
-  const hasActiveFilters = Object.values(filters).some(Boolean);
+  // Fix: filter out empty strings, null, undefined, false
+  const hasActiveFilters = stipendVal > 0 || Object.values(filters).some(
+    (v) => v !== "" && v !== null && v !== undefined && v !== false
+  );
 
   const handleStipend = (e) => {
     const v = Number(e.target.value);
     setStipendVal(v);
     onChange("stipend", v > 0 ? String(v) : "");
+  };
+
+  const handleClearAll = () => {
+    onClear();
+    setStipendVal(0);
+    setShowMoreFilters(false);
   };
 
   const progress = (stipendVal / STIPEND_MAX) * 100;
@@ -40,11 +49,6 @@ export default function FilterPanel({ internships, filters, onChange, onClear })
       <div className={`filter-body ${isOpen ? "open" : ""}`}>
         <div className="filter-header">
           <h3>Filters</h3>
-          {hasActiveFilters && (
-            <button className="clear-btn" onClick={() => { onClear(); setStipendVal(0); }}>
-              Clear all
-            </button>
-          )}
         </div>
 
         <div className="pref-row">
@@ -81,6 +85,14 @@ export default function FilterPanel({ internships, filters, onChange, onClear })
             {locations.map((l) => <option key={l} value={l} />)}
           </datalist>
           <div className="checkbox-group">
+            <label className="checkbox-label">
+              <input
+                type="checkbox"
+                checked={filters.myCity === "true"}
+                onChange={(e) => onChange("myCity", e.target.checked ? "true" : "")}
+              />
+              Internships in my city
+            </label>
             <label className="checkbox-label">
               <input
                 type="checkbox"
@@ -123,42 +135,24 @@ export default function FilterPanel({ internships, filters, onChange, onClear })
           </div>
         </div>
 
-        {/* Duration */}
-        <div className="filter-section">
-          <div className="filter-section-title">Duration</div>
-          <div className="radio-group">
-            {DURATION_OPTIONS.map((opt) => (
-              <label key={opt.value} className="radio-label">
-                <input
-                  type="radio"
-                  name="duration"
-                  value={opt.value}
-                  checked={filters.duration === opt.value}
-                  onChange={(e) => onChange("duration", e.target.value)}
-                />
-                <span>{opt.label}</span>
-              </label>
-            ))}
-            {filters.duration && (
-              <button className="reset-field" onClick={() => onChange("duration", "")}>Reset</button>
-            )}
-          </div>
-        </div>
-
-        {/* View more/less toggle */}
-        <div className="filter-section view-more-section">
+        {/* View more filters + Clear all on same row */}
+        <div className="view-more-row">
           <button
             className="view-more-btn"
             onClick={() => setShowMoreFilters(!showMoreFilters)}
           >
             {showMoreFilters ? "View less filters ▲" : "View more filters ▼"}
           </button>
+          {hasActiveFilters && (
+            <button className="clear-all-fixed" onClick={handleClearAll}>
+              Clear all
+            </button>
+          )}
         </div>
 
         {/* Extra filters */}
         {showMoreFilters && (
           <>
-            {/* Starting from */}
             <div className="filter-section">
               <div className="filter-section-title">Starting from (or after)</div>
               <input
@@ -172,7 +166,6 @@ export default function FilterPanel({ internships, filters, onChange, onClear })
               />
             </div>
 
-            {/* Max duration */}
             <div className="filter-section">
               <div className="filter-section-title">Max. duration (months)</div>
               <select
@@ -190,7 +183,6 @@ export default function FilterPanel({ internships, filters, onChange, onClear })
               </select>
             </div>
 
-            {/* Extra checkboxes */}
             <div className="filter-section">
               <div className="checkbox-group extra-checks">
                 <label className="checkbox-label">
@@ -230,18 +222,28 @@ export default function FilterPanel({ internships, filters, onChange, onClear })
                   <span className="filter-hint">ⓘ</span>
                 </label>
               </div>
-
-              {hasActiveFilters && (
-                <button
-                  className="clear-all-bottom"
-                  onClick={() => { onClear(); setStipendVal(0); }}
-                >
-                  Clear all
-                </button>
-              )}
             </div>
           </>
         )}
+
+        {/* Duration */}
+        <div className="filter-section">
+          <div className="filter-section-title">Duration</div>
+          <div className="radio-group">
+            {DURATION_OPTIONS.map((opt) => (
+              <label key={opt.value} className="radio-label">
+                <input
+                  type="radio"
+                  name="duration"
+                  value={opt.value}
+                  checked={filters.duration === opt.value}
+                  onChange={(e) => onChange("duration", e.target.value)}
+                />
+                <span>{opt.label}</span>
+              </label>
+            ))}
+          </div>
+        </div>
 
         {/* Keyword Search */}
         <div className="filter-section keyword-section">
