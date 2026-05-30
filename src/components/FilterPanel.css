@@ -58,7 +58,7 @@
 .pref-row label span { color: #008BDC; font-weight: 600; }
 
 .filter-section {
-  padding: 12px 16px;
+  padding: 14px 16px;
   border-bottom: 1px solid #f0f0f0;
 }
 
@@ -67,56 +67,70 @@
 .filter-section-title {
   font-size: 13px;
   font-weight: 600;
-  color: #444;
-  margin-bottom: 8px;
+  color: #333;
+  margin-bottom: 10px;
 }
 
 .filter-input {
   width: 100%;
-  padding: 7px 10px;
+  padding: 9px 12px;
   border: 1px solid #ddd;
-  border-radius: 3px;
+  border-radius: 4px;
   font-size: 13px;
   color: #333;
   outline: none;
   transition: border-color 0.15s;
   font-family: inherit;
+  background: #fff;
 }
 
-.filter-input::placeholder { color: #aaa; }
+.filter-input::placeholder { color: #bbb; }
 .filter-input:focus { border-color: #008BDC; box-shadow: 0 0 0 2px rgba(0,139,220,0.1); }
+
+.filter-select {
+  color: #bbb;
+  cursor: pointer;
+}
+
+.filter-select:valid { color: #333; }
 
 .checkbox-group {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 10px;
   margin-top: 8px;
+}
+
+.extra-checks {
+  gap: 14px;
+  margin-top: 0;
 }
 
 .checkbox-label {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 13px;
-  color: #444;
+  gap: 10px;
+  font-size: 14px;
+  color: #333;
   cursor: pointer;
+  font-weight: 500;
 }
 
 .checkbox-label input[type="checkbox"] {
-  width: 14px;
-  height: 14px;
+  width: 16px;
+  height: 16px;
   accent-color: #008BDC;
   cursor: pointer;
   flex-shrink: 0;
 }
 
-.stipend-section { padding: 12px 16px 16px; }
+.stipend-section { padding: 14px 16px 16px; border-bottom: 1px solid #f0f0f0; }
 
 .stipend-title {
   font-size: 13px;
   font-weight: 600;
-  color: #444;
-  margin-bottom: 10px;
+  color: #333;
+  margin-bottom: 12px;
 }
 
 .stipend-slider {
@@ -131,8 +145,8 @@
 
 .stipend-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
   background: #008BDC;
   cursor: pointer;
@@ -141,8 +155,8 @@
 }
 
 .stipend-slider::-moz-range-thumb {
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
   background: #008BDC;
   cursor: pointer;
@@ -152,7 +166,7 @@
 .stipend-labels {
   display: flex;
   justify-content: space-between;
-  margin-top: 6px;
+  margin-top: 8px;
   font-size: 11px;
   color: #888;
 }
@@ -160,7 +174,7 @@
 .radio-group {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
 }
 
 .radio-label {
@@ -187,10 +201,91 @@
   margin-top: 2px;
 }
 
-/* Mobile toggle button */
-.filter-toggle-btn {
-  display: none;
+/* View more filters */
+.view-more-section { padding: 10px 16px; }
+
+.view-more-btn {
+  width: 100%;
+  text-align: left;
+  font-size: 13px;
+  font-weight: 600;
+  color: #008BDC !important;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-family: inherit;
 }
+
+.view-more-btn:hover {
+  text-decoration: underline;
+  color: #0079c4 !important;
+}
+
+/* Filter hint */
+.filter-hint {
+  font-size: 14px;
+  color: #999;
+  margin-left: 2px;
+}
+
+/* Clear all bottom */
+.clear-all-bottom {
+  display: block;
+  margin-left: auto;
+  margin-top: 14px;
+  font-size: 13px;
+  color: #008BDC;
+  font-weight: 600;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.clear-all-bottom:hover { text-decoration: underline; }
+
+/* Keyword search */
+.keyword-section {
+  background: #fff;
+  border-top: 1px solid #e0e0e0;
+  margin-top: 8px;
+}
+
+.keyword-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #333;
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.keyword-wrapper {
+  display: flex;
+}
+
+.keyword-input {
+  border-radius: 4px 0 0 4px;
+  border-right: none;
+  flex: 1;
+}
+
+.keyword-btn {
+  padding: 9px 16px;
+  background: #008BDC;
+  color: #fff;
+  border: 1px solid #008BDC;
+  border-radius: 0 4px 4px 0;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
+
+.keyword-btn:hover { background: #0079c4; }
+
+/* Mobile toggle button */
+.filter-toggle-btn { display: none; }
 
 .active-indicator {
   color: #008BDC;
@@ -205,9 +300,7 @@
   flex-shrink: 0;
 }
 
-.toggle-icon.open {
-  transform: rotate(180deg);
-}
+.toggle-icon.open { transform: rotate(180deg); }
 
 /* Mobile */
 @media (max-width: 640px) {
@@ -231,9 +324,7 @@
     border-top: 1px solid #e8e8e8;
   }
 
-  .filter-body.open {
-    display: block;
-  }
+  .filter-body.open { display: block; }
 }
 
 @media (min-width: 641px) {

@@ -16,6 +16,7 @@ export default function FilterPanel({ internships, filters, onChange, onClear })
   const locations = getUniqueLocations(internships);
   const [stipendVal, setStipendVal] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
+  const [showMoreFilters, setShowMoreFilters] = useState(false);
 
   const hasActiveFilters = Object.values(filters).some(Boolean);
 
@@ -143,6 +144,119 @@ export default function FilterPanel({ internships, filters, onChange, onClear })
             )}
           </div>
         </div>
+
+        {/* View more/less toggle */}
+        <div className="filter-section view-more-section">
+          <button
+            className="view-more-btn"
+            onClick={() => setShowMoreFilters(!showMoreFilters)}
+          >
+            {showMoreFilters ? "View less filters ▲" : "View more filters ▼"}
+          </button>
+        </div>
+
+        {/* Extra filters */}
+        {showMoreFilters && (
+          <>
+            {/* Starting from */}
+            <div className="filter-section">
+              <div className="filter-section-title">Starting from (or after)</div>
+              <input
+                type="text"
+                className="filter-input"
+                placeholder="Choose date"
+                onFocus={(e) => (e.target.type = "date")}
+                onBlur={(e) => { if (!e.target.value) e.target.type = "text"; }}
+                value={filters.startDate || ""}
+                onChange={(e) => onChange("startDate", e.target.value)}
+              />
+            </div>
+
+            {/* Max duration */}
+            <div className="filter-section">
+              <div className="filter-section-title">Max. duration (months)</div>
+              <select
+                className="filter-input filter-select"
+                value={filters.maxDuration || ""}
+                onChange={(e) => onChange("maxDuration", e.target.value)}
+              >
+                <option value="" disabled hidden>Choose duration</option>
+                <option value="1">1 Month</option>
+                <option value="2">2 Months</option>
+                <option value="3">3 Months</option>
+                <option value="4">4 Months</option>
+                <option value="5">5 Months</option>
+                <option value="6">6 Months</option>
+              </select>
+            </div>
+
+            {/* Extra checkboxes */}
+            <div className="filter-section">
+              <div className="checkbox-group extra-checks">
+                <label className="checkbox-label">
+                  <input
+                    type="checkbox"
+                    checked={filters.jobOffer === "true"}
+                    onChange={(e) => onChange("jobOffer", e.target.checked ? "true" : "")}
+                  />
+                  <span>Internships with job offer</span>
+                  <span className="filter-hint">ⓘ</span>
+                </label>
+                <label className="checkbox-label">
+                  <input
+                    type="checkbox"
+                    checked={filters.fastResponse === "true"}
+                    onChange={(e) => onChange("fastResponse", e.target.checked ? "true" : "")}
+                  />
+                  <span>Fast response</span>
+                  <span className="filter-hint">ⓘ</span>
+                </label>
+                <label className="checkbox-label">
+                  <input
+                    type="checkbox"
+                    checked={filters.earlyApplicant === "true"}
+                    onChange={(e) => onChange("earlyApplicant", e.target.checked ? "true" : "")}
+                  />
+                  <span>Early applicant</span>
+                  <span className="filter-hint">ⓘ</span>
+                </label>
+                <label className="checkbox-label">
+                  <input
+                    type="checkbox"
+                    checked={filters.forWomen === "true"}
+                    onChange={(e) => onChange("forWomen", e.target.checked ? "true" : "")}
+                  />
+                  <span>Internships for women</span>
+                  <span className="filter-hint">ⓘ</span>
+                </label>
+              </div>
+
+              {hasActiveFilters && (
+                <button
+                  className="clear-all-bottom"
+                  onClick={() => { onClear(); setStipendVal(0); }}
+                >
+                  Clear all
+                </button>
+              )}
+            </div>
+          </>
+        )}
+
+        {/* Keyword Search */}
+        <div className="filter-section keyword-section">
+          <div className="keyword-title">Keyword Search</div>
+          <div className="keyword-wrapper">
+            <input
+              className="filter-input keyword-input"
+              placeholder="e.g. Design, Mumbai, Infosys"
+              value={filters.keyword || ""}
+              onChange={(e) => onChange("keyword", e.target.value)}
+            />
+            <button className="keyword-btn">🔍</button>
+          </div>
+        </div>
+
       </div>
     </div>
   );
